@@ -1,22 +1,22 @@
 const coding = ['JavaScript', 'Python', 'Java', 'C#', 'Ruby'];
 
-// coding.forEach( function (item){
-//     console.log(item);
-// } )
+coding.forEach( function (item){
+    console.log(item);
+} )
 
-// coding.forEach( (item) => {
-//     console.log(item);
-// })
+coding.forEach( (item) => {
+    console.log(item);
+})
 
-// function printme(item){
-//     console.log(item);
-// }
+function printme(item){
+    console.log(item);
+}
 
-// coding.forEach(printme);//only reference is passed not the function call
+coding.forEach(printme);//only reference is passed not the function call
 
-// coding.forEach( (item, index,arr) => {
-//     console.log(item,index,arr);}
-// );
+coding.forEach( (item, index,arr) => {
+    console.log(item,index,arr);}
+);
 
 const mycoding = [
     {

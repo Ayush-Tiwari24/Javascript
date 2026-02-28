@@ -5,7 +5,7 @@
 
 # Solution code 
 
-## project 1()
+## project 1(theme changer)
 
 ```javascript
 console.log("Ayush")
@@ -96,4 +96,104 @@ setInterval(function(){let date=new Date();
   // console.log(date.toLocaleTimeString());
   clock.innerHTML=date.toLocaleTimeString();
 },1000);
+```
+
+## project 4(guess the number)
+
+```javascript
+let randomNumber = parseInt(Math.random() * 100 + 1);
+
+const submit = document.querySelector('#subt');
+
+const userInput = document.getElementById('guessField');
+
+const guessSlot = document.querySelector('.guesses');
+const remaining = document.querySelector('.lastResult');
+
+const lowOrHi = document.querySelector('.lowOrHi');
+const startOver = document.querySelector('.resultParas');
+
+const p = document.createElement('p');
+
+let prevGuess = [];
+let numGuess = 1;
+
+let playGame = true;
+
+if (playGame) {
+  submit.addEventListener('click', function (e) {
+    e.preventDefault();
+    const guess = parseInt(userInput.value);
+    validateGuess(guess);
+  });
+}
+function validateGuess(guess) {
+  //checks wheather the number is within boundaries or not
+  if (isNaN(guess)) {
+    alert('PLease enter a valid number');
+  } else if (guess < 1) {
+    alert('PLease enter a number more than or equal to zero');
+  } else if (guess > 100) {
+    alert('PLease enter a number less than or equal to 100');
+  } else {
+    prevGuess.push(guess);
+    if (numGuess === 10) {
+      dispalyGuess(guess);
+      displayMessage(`Game over 🪦.Random number was ${randomNumber}`);
+      endGame();
+    } else {
+      dispalyGuess(guess);
+      checkGuess(guess);
+    }
+  }
+}
+
+function checkGuess(guess) {
+  //checks the number wheather it is equal,hi or low
+  if (randomNumber === guess) {
+    displayMessage(`You guessed it right 😊 in ${prevGuess.length} guesses`);
+    endGame();
+  } else if (randomNumber > guess) {
+    displayMessage('Number is TOO low 📉');
+  } else if (randomNumber < guess) {
+    displayMessage('Number is TOO high📈');
+  }
+}
+
+function dispalyGuess(guess) {
+  //updates the values like previous guess and guess remaining
+  userInput.value = '';
+  guessSlot.innerHTML += `${guess},`;
+  numGuess++;
+  remaining.innerHTML = `${11 - numGuess}`;
+}
+function displayMessage(message) {
+  //it shares the message that no is hi or low or guessed
+  lowOrHi.innerHTML = `<h2>${message}</h2>`;
+}
+
+function endGame() {
+  userInput.value='';
+  userInput.setAttribute('disabled','');
+  p.classList.add('button');
+  p.innerHTML=`<h2 id="newGame" style="cursor:pointer;border:solid red 2px ">Start New Game</h2>`;
+  startOver.appendChild(p);
+  playGame=false;
+  newGame();
+}
+
+function newGame() {
+  newGameButton=document.querySelector('#newGame')
+  newGameButton.addEventListener('click',function(e){
+    randomNumber= parseInt(Math.random() * 100 + 1);
+    prevGuess=[]
+    numGuess=1;
+    guessSlot.innerHTML=''
+    remaining.innerHTML=`${11 - numGuess}`;
+    userInput.removeAttribute('disabled')
+    startOver.removeChild(p)
+    playGame=true;
+  });
+}
+
 ```

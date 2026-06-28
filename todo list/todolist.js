@@ -5,16 +5,20 @@ const parent = document.querySelector(".parent");
 const empty = document.querySelector(".prev");
 let count = 0;
 Addbtn.addEventListener("click", () => {
-    console.log("Button clicked");
     const value = input.value.trim();
     if (!value) return;
-    empty.remove();
+
+    const empty = document.querySelector(".prev");
+    if (empty) empty.remove();
+
     parent.innerHTML += `
-        <div class="task"><label><input type="checkbox" /> </label>${value}
-            <button class="dlt">Delete</button></div>
-            `;
+    <div class="task">
+        <label><input type="checkbox"></label>
+        ${value}
+        <button class="dlt">Delete</button>
+    </div>`;
+
     input.value = "";
-    count++;
 });
 input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") Addbtn.click();
